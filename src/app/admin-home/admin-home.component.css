@@ -1,0 +1,28 @@
+table {
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 1%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+    text-align: center;
+  }
+  .position
+  {
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 0%;
+    background: rgba(255, 255, 255, 1);
+    border-radius:0% !important; 
+  }
+  table th
+  { 
+    text-align: center;
+    
+  }
+  table tr{
+    text-align: center;
+  }

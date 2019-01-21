@@ -1,0 +1,16 @@
+<nav class="navbar navbar-dark bg-dark mb-5">
+  <div class="navbar-expand mr-auto">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="['/admin']" href=""  routerLinkActive="active"><i class="material-icons">
+          home
+          </i><span>Home</span></a>
+    </div>
+  </div>
+  <div class="navbar-expand ml-auto navbar-nav">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" [routerLink]="['/auth/login']" href=""  routerLinkActive="active">Logout</a>
+
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

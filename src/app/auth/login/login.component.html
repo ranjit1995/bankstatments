@@ -1,0 +1,43 @@
+<app-header></app-header>
+  <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <form>
+    <mat-card class="example-card">
+      <mat-card-content style="margin-top:1%"><br>
+        <i class="material-icons" style="font-size: 100px">account_circle</i>
+        <p style="font-size: 20px"><b>Login</b></p>
+      </mat-card-content>
+      <mat-card-content>
+        <p>
+          <mat-form-field appearance="outline" style="width:100%;margin-bottom: -4%">
+            <mat-label>Email Id</mat-label>
+            <input matInput type="email" id="email" placeholder="Email Id" [(ngModel)]="email" name="email">
+            <mat-icon matSuffix>assignment_ind</mat-icon>
+            </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" style="width:100%;margin-bottom: -4%">
+            <mat-label>Email Id</mat-label>
+            <input matInput placeholder="Enter your password" name="password" id="password" [(ngModel)]="password" [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>     
+        </p>
+      </mat-card-content>
+        <mat-card-actions style="margin-top: -5%;">
+          <p style="text-align: center">
+            <button mat-raised-button type="submit" style="margin-bottom: -3%;width:30%;height:50px;background:black;color:lightseagreen" (click)="login()">Login</button>
+          </p>
+        </mat-card-actions>
+        <mat-card-content>
+            <mat-label style="float: left;color: forestgreen;"><a href="#"><b>Register</b></a></mat-label>
+        </mat-card-content>
+        <mat-card-content>
+            <mat-label style="float:right;color: forestgreen;"><a href="#"><b>Forget Password ?</b></a></mat-label>
+        </mat-card-content>
+    </mat-card>
+  </form>
+  </div>
+</div>
+</div>
+    <router-outlet></router-outlet>
