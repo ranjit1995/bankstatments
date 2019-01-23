@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.component';
 export interface PeriodicElement {
   selectId:number;
   transectionId:string;
@@ -37,11 +39,25 @@ export class AdminHomeComponent implements OnInit {
 dataSources=ELEMENT_DATA
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  constructor(private _router: Router,private Auth:AuthService) { }
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.getAllStatement();
   }
+
+  getAllStatement()
+  {
+    this.Auth.viewAllStatement(1).subscribe(res => {
+      console.log("Statements are ",res);
+      error=>{
+        console.log("error is",error)
+        alert("invalid user or password");
+       }
+      }
+      );
+  }
+
 addTagDialog()
 {
   console.log("hello tag is successfully added");
