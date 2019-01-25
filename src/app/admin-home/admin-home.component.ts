@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
 import { Router } from '@angular/router';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../auth.component';
+import { Headers } from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 export interface PeriodicElement {
   selectId:number;
   transectionId:string;
@@ -34,12 +37,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AdminHomeComponent implements OnInit {
 
+  allData : any = [];
+  filterBol : boolean;
   displayedColumns: string[] = ['selectId', 'transectionId', 'transactionDate', 'Amount','type','tag'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 dataSources=ELEMENT_DATA
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private _router: Router,private Auth:AuthService) { }
+  filterBvalue: any;
+  fileData: FileList;
+  file: File;
+  formData: FormData;
+  //spin: boolean = false;;
+  constructor(private _router: Router,private Auth:AuthService, private http:HttpClient, private spinnerService: Ng4LoadingSpinnerService) { }
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -48,8 +58,11 @@ dataSources=ELEMENT_DATA
 
   getAllStatement()
   {
-    this.Auth.viewAllStatement(1).subscribe(res => {
-      console.log("Statements are ",res);
+    this.filterBol = true;
+    this.Auth.viewAllStatement().subscribe(res => {
+      //console.log("Statements are ",res);
+      this.allData = res;
+      console.log(this.allData);
       error=>{
         console.log("error is",error)
         alert("invalid user or password");
@@ -66,8 +79,50 @@ removeTagDialog()
 {
   console.log("hello tag is removed");
 }
-click()
+fileUpload(event)
 {
-  console.log("hello");
+  //this.spin = true;
+  console.log("It's loading");
+  this.fileData = event.target.files;
+  if(this.fileData.length > 0)
+  {
+    console.log("hello");
+    console.log(this.fileData);
+    this.file = this.fileData[0];
+    this.formData = new FormData();
+    this.formData.append('uploadFile', this.file, this.file.name);
+    let headers : Headers = new Headers();
+    headers.append('Content-Type','multipart/form-data');
+    headers.append('Accept','application/json');
+    this.Auth.importData(this.formData).subscribe(res =>{
+      if(res==null)
+      {
+        console.log("Data alreday updated");
+        this.spinnerService.hide();
+        this._router.navigate(['/admin']);
+        //alert("Data Alreday Updated");
+      }
+      else
+        location.reload();
+    })
+  }
+}
+filter(e)
+{
+  console.log(e)
+  this.filterBvalue=e.checked;
+  if(this.filterBvalue===true)
+  {
+    this.filterBol = false;
+    console.log("true");
+    this.Auth.filterTransaction().subscribe(res => {
+      this.allData = res;
+    });
+  }
+  else
+  {
+    console.log("false");
+    this.getAllStatement();
+  }
 }
 }

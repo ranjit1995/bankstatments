@@ -8,16 +8,16 @@
   </div>
   <div class="col-sm-5">
       
-          <mat-form-field appearance="outline" style="width:100%;margin-bottom: -1.5%">
+          <!-- <mat-form-field appearance="outline" style="width:100%;margin-bottom: -1.5%">
             <input matInput type="search" id="search" placeholder="search" (ngModel)="search" name="search">
             <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
+          </mat-form-field> -->
     
      
   </div>
   <div class="col-sm-2" style="text-align: center;max-width: 100% !important;margin-top: 1.5%;">
    
-      <mat-checkbox >Filter Of Tag</mat-checkbox>
+      <mat-checkbox (change)="filter($event)">Filter Of Tag</mat-checkbox>
    
   </div>
   <div class="col-sm-2" style="text-align: center;max-width: 100% !important;margin-top: 1.5%;">
@@ -30,13 +30,13 @@
             <mat-card-actions style="margin-top: -5%;">
               <span type="submit" style="width: -webkit-fill-available;
               height: fit-content;">
-              <input type="file" style="display: none"  #fileInput> <mat-icon (click)="fileInput.click()">archive</mat-icon></span>
+              <input type="file" style="display: none" value="Upload" accept=".xlsx" (change)="fileUpload($event)" #fileInput> <mat-icon (click)="fileInput.click()">archive</mat-icon></span>
           </mat-card-actions>
   </div>
 </div>
 </mat-card> 
 <mat-card class="position">
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <!-- <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
  
   <ng-container matColumnDef="selectId">
     <th mat-header-cell *matHeaderCellDef >Select</th>
@@ -72,23 +72,61 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons ></mat-paginator>
-</mat-card>
-<!-- 
-<table  class="mat-elevation-z8" style="background-color: white">
-  <tr>
-    <th>No</th>
-    <th>name</th>
-    <th>Weight</th>
-    <th>Symbol</th>
-  </tr>
-  <tr *ngFor="let data of dataSources">
-    <td>{{data.position}}</td>
-    <td>{{data.name}}</td>
-    <td>{{data.weight}}</td>
-    <td>{{data.symbol}}</td>
-  </tr>
-</table> -->
+</mat-card> -->
 
+<table  class="mat-elevation-z8" style="background-color: white" border="0px">
+  <tr>
+    <!--<th>S.No</th>-->
+    <th>Date</th>
+    <th>Description</th>
+    <th>Reference No.</th>
+    <th>Branch Code</th>
+    <th>Credit</th>
+    <th>Debit</th>
+    <th>Balance</th>
+    <th colspan="2">Category</th>
+  </tr>
+  <tr style="border-bottom: solid 2px lightgray">
+    <!--<th></th>-->
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Type</th>
+    <th>Area</th>
+  </tr>
+  <tr *ngFor="let data of allData.data; let i = index" style="border-bottom: solid 1px lightgray">
+    <!--<td>{{i+1}}</td>-->
+    <td style="width:10%">{{data.Date}}</td>
+    <td style="width:20%">{{data.Description}}</td>
+    <td style="width:10%">{{data.ref_no}}</td>
+    <td style="width:10%">{{data.Branch_Code}}</td>
+    <td style="width:10%">{{data.Credit}}</td>
+    <td style="width:10%">{{data.Debit}}</td>
+    <td style="width:10%">{{data.Balance}}</td>
+    <ng-container *ngIf="filterBol; then categoryData else anotherData"></ng-container>
+    <ng-template #categoryData>
+      <td style="width:10%">{{data.category.Type}}</td>
+      <td style="width:10%">{{data.category.Area}}</td>
+    </ng-template>
+    <ng-template #anotherData>
+      <td style="width:10%">-</td>
+      <td style="width:10%">-</td>
+    </ng-template>
+  </tr>
+</table>
+</mat-card>
+
+
+<!-- <div *ngIf="spin" class="app-loading">
+    <div class="logo"></div>
+    <svg class="spinner" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+  </div> -->
 
 
 

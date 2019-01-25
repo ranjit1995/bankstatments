@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { Router } from '@angular/router';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +16,7 @@ export class AuthService {
   }
   
 
-  constructor(private http: HttpClient, private _router: Router) { }
+  constructor(private http: HttpClient, private _router: Router, private spinnerService: Ng4LoadingSpinnerService) { }
   login(body) {
     console.log("IN service");
     return this.http.post('http://192.168.1.38:3000/auth/login',body);
@@ -30,14 +33,24 @@ export class AuthService {
    
 
   }
-  viewAllStatement(id) {
-    console.log("IN service",id);
-    return this.http.get('http://192.168.1.38:3000/users/'+id);
-   
+  viewAllStatement() {
+    console.log("IN service");
+    return this.http.get('http://192.168.1.24:3000/transactions/details/');
 
   }
 
+  filterTransaction()
+  {
+    console.log("Filtered Data");
+   return this.http.get("http://192.168.1.24:3000/transactions/notag/");
+  }
 
+  importData(fData)
+  {
+    this.spinnerService.show();
+    console.log("Loading");
+    return this.http.post("http://192.168.1.24:3000/transactions/import", fData);
+  }
   
 }
 

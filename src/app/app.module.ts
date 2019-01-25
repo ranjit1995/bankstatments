@@ -49,6 +49,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 const routes: Routes = [
 { path: '',   redirectTo: '/home', pathMatch: 'full' },
@@ -83,6 +84,7 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
     ChartsModule,MatFileUploadModule,
     FormsModule,
     BrowserAnimationsModule,
+    Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot(
       routes,
       { enableTracing: true } // <-- debugging purposes only
