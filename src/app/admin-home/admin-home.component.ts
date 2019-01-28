@@ -107,6 +107,11 @@ fileUpload(event)
     })
   }
 }
+
+chartData()
+{
+
+}
 filter(e)
 {
   console.log(e)

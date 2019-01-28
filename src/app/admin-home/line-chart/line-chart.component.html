@@ -1,19 +1,24 @@
 
 <app-admin-header></app-admin-header>
-<div class="container">
+<!-- <div class="container">
     <div style="display: block;width:98% !important;margin-left: 2%;background: white;color:teal">
-      <canvas baseChart 
-        [datasets]="lineChartData"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)">
-      </canvas>
+      
+        <canvas baseChart 
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)">
+        </canvas>
+   
     </div>
-  </div>
+  </div> -->
+
+
+
   <!-- <div class="col-md-6" style="margin-bottom: 10px">
     <table class="table table-responsive table-condensed">
       <tr>
@@ -29,3 +34,38 @@
 
 
 <!-- chart demo avalilable here  => https://appdividend.com/2018/09/12/angular-charts-example-tutorial/ -->
+
+<mat-card class="position">
+  <table  class="mat-elevation-z8" style="background-color: white; width: 100%" border="0px">
+    <tr>
+      <th></th>
+      <th>Jan</th>
+      <th>Feb</th>
+      <th>Mar</th>
+      <th>Apr</th>
+      <th>May</th>
+      <th>Jun</th>
+      <th>Jul</th>
+      <th>Aug</th>
+      <th>Sept</th>
+      <th>Oct</th>
+      <th>Nov</th>
+      <th>Dec</th>
+    </tr>
+    <tr *ngFor="let amount of ChartData; let i = index" style="border-bottom: solid 1px lightgray">
+      <td>{{amount.ChartData.tagdata.name}}</td>
+      <td>{{amount.data.id}}</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </table>
+</mat-card>

@@ -19,37 +19,43 @@ export class AuthService {
   constructor(private http: HttpClient, private _router: Router, private spinnerService: Ng4LoadingSpinnerService) { }
   login(body) {
     console.log("IN service");
-    return this.http.post('http://192.168.1.38:3000/auth/login',body);
+    return this.http.post('http://192.168.1.38:4000/auth/login',body);
   }
   addTag(body) {
     console.log("IN service");
-    return this.http.post('http://192.168.1.38:3000/users',body);
+    return this.http.post('http://192.168.1.38:4000/users',body);
 
   }
   
   deleteTag(body) {
     console.log("IN service",body);
-    return this.http.delete('http://192.168.1.38:3000/users',body);
+    return this.http.delete('http://192.168.1.38:4000/users',body);
    
 
   }
   viewAllStatement() {
     console.log("IN service");
-    return this.http.get('http://192.168.1.24:3000/transactions/details/');
+    return this.http.get('http://localhost:4000/transactions/details/');
 
   }
 
   filterTransaction()
   {
     console.log("Filtered Data");
-   return this.http.get("http://192.168.1.24:3000/transactions/notag/");
+   return this.http.get("http://localhost:4000/transactions/notag/");
   }
 
   importData(fData)
   {
     this.spinnerService.show();
     console.log("Loading");
-    return this.http.post("http://192.168.1.24:3000/transactions/import", fData);
+    return this.http.post("http://localhost:4000/transactions/import", fData);
+  }
+
+  ChartDetails()
+  {
+    console.log("Calling Chart Data");
+   return this.http.get("http://localhost:4000/transactions/chartdetails");
   }
   
 }
