@@ -9,24 +9,24 @@ import { AuthService } from 'src/app/auth.component';
 export class LineChartComponent implements OnInit {
 
   chartData : any = [];
-  purposeAmount : any = [];
-  pName: any = [];
-  // credit : any = [];
-  // debit : any =[];
-  // sale : any = [];
-  // delivery : any = [];
-  // hr : any = [];
-  // Form : any = [];
-  // chData : any = [];
+  credit : any = [];
+  debit : any =[];
+  sale : any = [];
+  delivery : any = [];
+  hr : any = [];
+  Form : any = [];
+  len : number = 1;
+  allChartData: any = [];
+  extra: any = [];
 
   
   // public lineChartData:Array<any> = [
-  //    {data: [1.65, 59, 80, 81, 56, 55, 40 , 34, 74,54,44,56], label: 'credit'},
-  //    {data: [28, 48, 40, 19, 86, 27, 90,76,3,45,6,34], label: 'debit'},
-  //    {data: [18, 48, 77, 9, 100, 27, 40,89,45,76,4,45], label: 'sale'},
-  //    {data: [10, 28, 47, 9, 100, 57, 60,39,54,86,2,15], label: 'delivery'},
-  //    {data: [38, 48, 77, 29, 10, 17, 40,69,25,76,4,25], label: 'hr'},
-  //    {data: [18, 58, 27, 59, 40, 77, 60,89,24,26,1,5], label: 'Form'}
+  //    {data: [this.credit], label: 'credit'},
+  //    {data: [this.debit], label: 'debit'},
+  //    {data: [this.sale], label: 'sale'},
+  //    {data: [this.delivery], label: 'delivery'},
+  //    {data: [this.hr], label: 'hr'},
+  //    {data: [this.Form], label: 'Form'}
   // ];
 
   constructor(private Auth:AuthService) {}
@@ -43,47 +43,106 @@ export class LineChartComponent implements OnInit {
 
   getChartData()
   {
-    this.Auth.ChartDetails().subscribe(data => {
-        console.log("Chart Details");
-        //console.log(res);
-        this.chartData = data; 
-        console.log(this.chartData);
-        for(let amount of this.chartData.tagdata)
+    this.Auth.ChartDetails().subscribe(data => 
+    {
+      this.chartData = data; 
+      for(let purName of this.chartData.tagdata)
+      {
+        for(let amount of this.chartData.data)
         {
-          this.purposeAmount.push(amount.name);
+          switch(purName.name)
+          { 
+            case "credit" : if(this.len==1)
+                            {
+                              this.credit.push(purName.name);
+                              for(let single of amount)
+                              {
+                                this.credit.push(single);
+                              }
+                              this.len++;
+                            }
+                            break;
+            case "debit"  : if(this.len<=2)
+                            {
+                              this.extra.push(amount);
+                              this.len++;
+                            }
+                            else if(this.len==3)
+                            {
+                              this.debit.push(purName.name);
+                              for(let single of amount)
+                              {
+                                this.debit.push(single);
+                              }
+                              this.len++;
+                            }
+                            break;
+            case "sale" : if(this.len<=5)
+                          {
+                            this.extra.push(amount);
+                            this.len++;
+                          }
+                          else if(this.len==6)
+                          {
+                            this.sale.push(purName.name);
+                            for(let single of amount)
+                            {
+                              this.sale.push(single);
+                            }
+                            this.len++;
+                          }
+                          break;
+            case "delivery" : if(this.len<=9)
+                              {
+                                this.extra.push(amount);
+                                this.len++;
+                              }
+                              else if(this.len==10)
+                              {
+                                this.delivery.push(purName.name);
+                                for(let single of amount)
+                                {
+                                  this.delivery.push(single);
+                                }
+                                this.len++;
+                              }
+                              break;
+            case "hr" : if(this.len<=14)
+                        {
+                          this.extra.push(amount);
+                          this.len++;
+                        }
+                        else if(this.len==15)
+                        {
+                          this.hr.push(purName.name);
+                          for(let single of amount)
+                          {
+                            this.hr.push(single);
+                          }
+                          this.len++;
+                        }
+                        break;
+            case "Form" : if(this.len<=20)
+                          {
+                            this.extra.push(amount);
+                            this.len++;
+                          }
+                          else if(this.len==21)
+                          {
+                            this.Form.push(purName.name);
+                            for(let single of amount)
+                            {
+                              this.Form.push(single);
+                            }
+                            this.len++;
+                          }
+                          break;
+            default : "Error";
+          }
         }
-        // console.log(this.chartData.data.name);
-        //   for(let chData of this.chartData.data)
-        //   {
-        //     for(let usage of this.chartData.tagdata)
-        //       switch(this.chartData.tagdata.id)
-        //       {
-        //         case 0 :  this.credit.push(chData);
-        //                   this.credit.push(usage);
-        //                   break;
-        //         case 1 :  this.debit.push(chData);
-        //                   this.debit.push(usage);
-        //                   break;
-        //         case 2 :  this.sale.push(chData);
-        //                   this.sale.push(usage);
-        //                   break;
-        //         case 3 :  this.delivery.push(chData);
-        //                   this.delivery.push(usage);
-        //                   break;
-        //         case 4 :  this.hr.push(chData);
-        //                   this.hr.push(usage);
-        //                   break;
-        //         case 5 :  this.Form.push(chData);
-        //                   this.Form.push(usage);
-        //                   break;
-        //         default : "Error";
-        //       }
-        //   }
-        //  console.log("Credit")
-        // console.log(this.credit);
+      }
     });
   }
-
 
   // public lineChartColors:Array<any> = [
   //   { // grey

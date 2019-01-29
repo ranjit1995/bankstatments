@@ -1,4 +1,3 @@
-
 <app-admin-header></app-admin-header>
 <!-- <div class="container">
     <div style="display: block;width:98% !important;margin-left: 2%;background: white;color:teal">
@@ -19,7 +18,7 @@
 
 
 
-  <!-- <div class="col-md-6" style="margin-bottom: 10px">
+<!-- <div class="col-md-6" style="margin-bottom: 10px">
     <table class="table table-responsive table-condensed">
       <tr>
         <th *ngFor="let label of lineChartLabels">{{label}}</th>
@@ -35,8 +34,8 @@
 
 <!-- chart demo avalilable here  => https://appdividend.com/2018/09/12/angular-charts-example-tutorial/ -->
 
-<mat-card class="position">
-  <table  class="mat-elevation-z8" style="background-color: white; width: 100%" border="0px">
+<mat-card class="container ">
+  <table class="mat-elevation-z8" style="background-color: white; width: 100%" border="0px">
     <tr>
       <th></th>
       <th>Jan</th>
@@ -52,20 +51,23 @@
       <th>Nov</th>
       <th>Dec</th>
     </tr>
-    <tr *ngFor="let amount of ChartData; let i = index" style="border-bottom: solid 1px lightgray">
-      <td>{{amount.ChartData.tagdata.name}}</td>
-      <td>{{amount.data.id}}</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
+    <tr style="border-bottom: solid 1px lightgray">
+      <td *ngFor="let creditRow of credit ; let i = index">{{creditRow}}</td>
+    </tr>
+    <tr style="border-bottom: solid 1px lightgray">
+      <td *ngFor="let debitRow of debit ; let i = index">{{debitRow}}</td>
+    </tr>
+    <tr style="border-bottom: solid 1px lightgray">
+      <td *ngFor="let saleRow of sale ; let i = index">{{saleRow}}</td>
+    </tr>
+    <tr style="border-bottom: solid 1px lightgray">
+      <td *ngFor="let deliveryRow of delivery ; let i = index">{{deliveryRow}}</td>
+    </tr>
+    <tr style="border-bottom: solid 1px lightgray">
+      <td *ngFor="let hrRow of hr ; let i = index">{{hrRow}}</td>
+    </tr>
+    <tr style="border-bottom: solid 1px lightgray">
+      <td *ngFor="let FormRow of Form ; let i = index">{{FormRow}}</td>
     </tr>
   </table>
 </mat-card>
